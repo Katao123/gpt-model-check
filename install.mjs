@@ -28,7 +28,7 @@ try {
   // Install only distributable runtime resources, not a Git checkout or reports.
   for (const name of ['SKILL.md', 'agents', 'assets', 'scripts', 'package.json', 'LICENSE', 'install.mjs'])
     await cp(path.join(source, name), path.join(temporary, name), { recursive: true, errorOnExist: true, force: false });
-  for (const name of ['README.md', 'THIRD_PARTY_NOTICES.md']) {
+  for (const name of ['README.md', 'README.en.md', 'THIRD_PARTY_NOTICES.md']) {
     try { await access(path.join(source, name)); }
     catch { continue; }
     await cp(path.join(source, name), path.join(temporary, name), { errorOnExist: true, force: false });

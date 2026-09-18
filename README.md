@@ -1,5 +1,7 @@
 # gpt-model-check
 
+[简体中文](README.md) | [English](README.en.md)
+
 **在 Codex 里输入 `$gpt-model-check`，检测当前所选 GPT 的行为指纹是否与参考库相符。**
 
 沿用当前任务的模型、渠道和推理档位，自动采样、判分并展示结果。无需手动复制探针答案，也无需额外配置检测服务的 API Key。
