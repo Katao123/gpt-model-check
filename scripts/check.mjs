@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
@@ -88,7 +88,7 @@ export async function execute(options, { env = process.env, progress = () => {},
   const start = Date.now();
   const { app, source, runtime, originator } = await connectCurrent(options, env);
   const report = {
-    schemaVersion: 1, tool: 'gpt-model-check', toolVersion: '0.1.11', command: options.command,
+    schemaVersion: 1, tool: 'gpt-model-check', toolVersion: '0.1.12', command: options.command,
     createdAt: new Date().toISOString(), context: options.context || 'fresh',
     source: { id: source.id, model: source.model, provider: source.modelProvider, effort: source.reasoningEffort, originator },
     runtime: { file: runtime.file, selection: runtime.selection, platform: process.platform, node: process.version },
@@ -158,4 +158,7 @@ async function main() {
     console.log(options?.json ? JSON.stringify(report, null, 2) : summary(report)); process.exitCode = 1;
   } finally { process.off('SIGINT', stop); process.off('SIGTERM', stop); }
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) await main();
+// Node resolves the module URL through symlinks, while argv keeps the user's path
+// (for example /var vs /private/var on macOS). Compare the canonical entry path.
+const entry = process.argv[1] ? await realpath(process.argv[1]).catch(() => null) : null;
+if (entry && import.meta.url === pathToFileURL(entry).href) await main();

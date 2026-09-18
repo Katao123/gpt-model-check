@@ -35,6 +35,10 @@ test('receipt and install work in paths with spaces; existing skills are preserv
     assert.equal(first.status, 0, first.stderr);
     const dest = path.join(root, 'skills', 'gpt-model-check', 'SKILL.md');
     const before = await readFile(dest, 'utf8');
+    const models = spawnSync(process.execPath, [path.join(path.dirname(dest), 'scripts/check.mjs'), 'models'],
+      { env: { ...process.env, CODEX_HOME: root }, encoding: 'utf8' });
+    assert.equal(models.status, 0, models.stderr);
+    assert.equal(JSON.parse(models.stdout).models.length, 6);
     const again = spawnSync(process.execPath, [install], { env: { ...process.env, CODEX_HOME: root }, encoding: 'utf8' });
     assert.equal(again.status, 1);
     assert.equal(await readFile(dest, 'utf8'), before);
