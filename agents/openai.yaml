@@ -1,0 +1,4 @@
+interface:
+  display_name: "GPT 模型检测"
+  short_description: "自动检测当前 Codex 所选 GPT 的参考指纹，展示匹配或异常线索"
+  default_prompt: "使用 $gpt-model-check 检测当前 Codex 所选 GPT 的模型指纹。"

@@ -1,0 +1,19 @@
+{
+  "source": "ModelTrace unified fingerprint library",
+  "normalization": "UTF-8 with LF line endings",
+  "bankPath": "assets/bank.json",
+  "scorerPath": "scripts/fingerprint-core.mjs",
+  "bankSha256": "6a3f7e4d703990a2322cf535020309380ca858654345d8fe5db278578568bad3",
+  "scorerSha256": "83fa5bd611e18f8339122582335123c8ea168ed242298bb31f4e363abeeb6e4a",
+  "bankBuiltAt": "2026-09-05T02:13:56.070726+00:00",
+  "modelCount": 13,
+  "sameContextCalibrated": false,
+  "multilingualCalibrated": false,
+  "upstreamRepository": "https://github.com/xqy2006/ModelTrace",
+  "upstreamCommit": "3f0dd2f4b451ad424f3b165a108a468efe4d4d81",
+  "transportReference": {
+    "repository": "https://github.com/kiyoakii/is-gpt-nerfed",
+    "commit": "38498671b32015b97901717207d38b4508b57301"
+  },
+  "decisionCalibration": "Experimental conservative gates; not an independently validated accuracy or identity probability."
+}

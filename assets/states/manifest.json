@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "generation": "Built-in image_gen; full-bleed framing edit of the approved five orange-cat cards. Preserves state, character and wording while removing outer padding and frame.",
+  "editPrompts": {
+    "match": "Edit the attached existing orange-cat status illustration for a software result thumbnail. This is a precise composition/framing edit, not a redesign. Remove the entire dark or gray outside background, glow, drop shadow, outer decorative outline and the surrounding unused margins. Enlarge the existing card content so its light pastel background fills the ENTIRE rectangular image edge to edge, with NO outer card floating inside a larger canvas, NO framing border, and NO empty padding around it. Use portrait 2:3 aspect ratio. The cat should look larger and fuller in the thumbnail. Preserve the same orange-and-white cat character, green scarf, pose, facial expression, props, emotional meaning, pastel palette, watercolor texture and exact original Chinese headline and caption. Keep all letters complete and readable within a small internal safe margin, roughly 4 percent. Do not add any new text, percentages, labels, timestamps or decorations. Do not create a mockup, contact sheet, desktop UI, or screenshot; output ONLY one finished full-bleed image asset. Input image is the edit target, not merely a style reference.\nState: match. Preserve headline exactly \"指纹匹配\" and bottom caption exactly \"对上啦！\".",
+    "mismatch": "Edit the attached existing orange-cat status illustration for a software result thumbnail. This is a precise composition/framing edit, not a redesign. Remove the entire dark or gray outside background, glow, drop shadow, outer decorative outline and the surrounding unused margins. Enlarge the existing card content so its light pastel background fills the ENTIRE rectangular image edge to edge, with NO outer card floating inside a larger canvas, NO framing border, and NO empty padding around it. Use portrait 2:3 aspect ratio. The cat should look larger and fuller in the thumbnail. Preserve the same orange-and-white cat character, green scarf, pose, facial expression, props, emotional meaning, pastel palette, watercolor texture and exact original Chinese headline and caption. Keep all letters complete and readable within a small internal safe margin, roughly 4 percent. Do not add any new text, percentages, labels, timestamps or decorations. Do not create a mockup, contact sheet, desktop UI, or screenshot; output ONLY one finished full-bleed image asset. Input image is the edit target, not merely a style reference.\nState: mismatch. Preserve headline exactly \"指纹明显不符\" and bottom caption exactly \"有点不对劲\".",
+    "inconclusive": "Edit the attached existing orange-cat status illustration for a software result thumbnail. This is a precise composition/framing edit, not a redesign. Remove the entire dark or gray outside background, glow, drop shadow, outer decorative outline and the surrounding unused margins. Enlarge the existing card content so its light pastel background fills the ENTIRE rectangular image edge to edge, with NO outer card floating inside a larger canvas, NO framing border, and NO empty padding around it. Use portrait 2:3 aspect ratio. The cat should look larger and fuller in the thumbnail. Preserve the same orange-and-white cat character, green scarf, pose, facial expression, props, emotional meaning, pastel palette, watercolor texture and exact original Chinese headline and caption. Keep all letters complete and readable within a small internal safe margin, roughly 4 percent. Do not add any new text, percentages, labels, timestamps or decorations. Do not create a mockup, contact sheet, desktop UI, or screenshot; output ONLY one finished full-bleed image asset. Input image is the edit target, not merely a style reference.\nState: inconclusive. Preserve headline exactly \"证据不足\" and bottom caption exactly \"还得再看看\".",
+    "unsupported": "Edit the attached existing orange-cat status illustration for a software result thumbnail. This is a precise composition/framing edit, not a redesign. Remove the entire dark or gray outside background, glow, drop shadow, outer decorative outline and the surrounding unused margins. Enlarge the existing card content so its light pastel background fills the ENTIRE rectangular image edge to edge, with NO outer card floating inside a larger canvas, NO framing border, and NO empty padding around it. Use portrait 2:3 aspect ratio. The cat should look larger and fuller in the thumbnail. Preserve the same orange-and-white cat character, green scarf, pose, facial expression, props, emotional meaning, pastel palette, watercolor texture and exact original Chinese headline and caption. Keep all letters complete and readable within a small internal safe margin, roughly 4 percent. Do not add any new text, percentages, labels, timestamps or decorations. Do not create a mockup, contact sheet, desktop UI, or screenshot; output ONLY one finished full-bleed image asset. Input image is the edit target, not merely a style reference.\nState: unsupported. Preserve headline exactly \"模型不支持\" and bottom caption exactly \"这个还不认识\".",
+    "error": "Edit the attached existing orange-cat status illustration for a software result thumbnail. This is a precise composition/framing edit, not a redesign. Remove the entire dark or gray outside background, glow, drop shadow, outer decorative outline and the surrounding unused margins. Enlarge the existing card content so its light pastel background fills the ENTIRE rectangular image edge to edge, with NO outer card floating inside a larger canvas, NO framing border, and NO empty padding around it. Use portrait 2:3 aspect ratio. The cat should look larger and fuller in the thumbnail. Preserve the same orange-and-white cat character, green scarf, pose, facial expression, props, emotional meaning, pastel palette, watercolor texture and exact original Chinese headline and caption. Keep all letters complete and readable within a small internal safe margin, roughly 4 percent. Do not add any new text, percentages, labels, timestamps or decorations. Do not create a mockup, contact sheet, desktop UI, or screenshot; output ONLY one finished full-bleed image asset. Input image is the edit target, not merely a style reference.\nState: error. Preserve headline exactly \"执行失败\" and bottom caption exactly \"这次没测成\"."
+  },
+  "renderPolicy": "Local static asset selected by actual detector status; never generated during a check.",
+  "assets": {
+    "match": {
+      "file": "match.png",
+      "sha256": "46932a774c045902f85b1bedfc9ef0a36d4ddcc65fb3344d10540df7d89950cc",
+      "width": 1024,
+      "height": 1536,
+      "previousSha256": "1bde883d3ab3ceae3d5f8bdd6eb80c1661d8cc71b002cc9f2f7e694a08fa189b"
+    },
+    "mismatch": {
+      "file": "mismatch.png",
+      "sha256": "ab05b1f3eb6a8864dfbf038d382b0adbad5ec0eaa5af9836fb8734b5ccbe0372",
+      "width": 1024,
+      "height": 1536,
+      "previousSha256": "675c14da49cac8171035992e1d4b9102c16ff7c1a810ff1b6ffb6ad1773f3c6d"
+    },
+    "inconclusive": {
+      "file": "inconclusive.png",
+      "sha256": "9e0a276c1164f60a73a0f8bead7236f875d68bd59dbc5d588ad38e88237f514a",
+      "width": 1024,
+      "height": 1536,
+      "previousSha256": "0f59949f34538e1c6e0e9894a1760610c62653f608dbf08c21af7020add10c02"
+    },
+    "unsupported": {
+      "file": "unsupported.png",
+      "sha256": "a2d1e93f06123697260d81d486294055d1b1f5cb129f7810fbe567f9b867c459",
+      "width": 1024,
+      "height": 1536,
+      "previousSha256": "12ba55188297b1d5316a12c9995c4ed76aacaa64c776bbdf671f83e5e1e8770a"
+    },
+    "error": {
+      "file": "error.png",
+      "sha256": "8d01b9329e9bc65fc6efd10444ea4f1a14f8e8755508db461ccaa47f1ecda9b6",
+      "width": 1024,
+      "height": 1536,
+      "previousSha256": "ad85884f531f1c9245ebc262c6e32b82802b6df3815c3d4bfd09c3913f16c080"
+    }
+  }
+}

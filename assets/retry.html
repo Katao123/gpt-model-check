@@ -1,0 +1,60 @@
+<div id="gpt-model-check-retry">
+  <div class="viz-row">
+    <a data-action="retry" href="#" role="button">
+      <i data-lucide="rotate-cw" aria-hidden="true"></i>
+      <span data-label>重新检测</span>
+    </a>
+    <span role="status" aria-live="polite"></span>
+  </div>
+</div>
+<style>
+#gpt-model-check-retry a:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  color: var(--accent-foreground);
+  font: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+#gpt-model-check-retry a:hover { text-decoration: underline; }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('gpt-model-check-retry');
+  const link = root.querySelector('[data-action="retry"]');
+  const label = root.querySelector('[data-label]');
+  const status = root.querySelector('[role="status"]');
+  const prompt = '使用 $gpt-model-check 对本任务当前选中的模型重新检测一次。直接执行检测脚本并输出新结果；不要回放旧记录，也不要自动反复重试。';
+  if (typeof window.openai?.sendFollowUpMessage !== 'function') {
+    link.hidden = true;
+    status.textContent = '建议重新检测一次，可发送「重新检测」。';
+    return;
+  }
+  let sending = false;
+  link.addEventListener('click', async event => {
+    event.preventDefault();
+    if (sending) return;
+    sending = true;
+    link.setAttribute('aria-disabled', 'true');
+    label.textContent = '正在发起…';
+    status.textContent = '';
+    try {
+      await window.openai.sendFollowUpMessage({ prompt, title: '重新检测当前模型' });
+      // The host can resolve without submitting when its confirmation is cancelled.
+      // Let the new Codex turn show progress; never invent a successful run here.
+    } catch {
+      status.textContent = '未能发送，请再点一次，或发送「重新检测」。';
+    } finally {
+      sending = false;
+      link.removeAttribute('aria-disabled');
+      label.textContent = '重新检测';
+    }
+  });
+  link.addEventListener('keydown', event => {
+    if (event.key === ' ') { event.preventDefault(); link.click(); }
+  });
+})();
+</script>
