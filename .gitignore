@@ -9,3 +9,4 @@ usage.lock/
 *.tmp
 *.zip
 coverage/
+docs/examples/gallery.html

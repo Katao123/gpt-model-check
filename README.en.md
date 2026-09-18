@@ -10,39 +10,61 @@ This is an experimental **model fingerprinting tool**. It can provide clues abou
 
 ## What you get
 
-After installation, select a model in the Codex task you want to check and send `$gpt-model-check`. These are actual Codex Desktop screenshots. The model IDs, sample counts, and token figures have been checked against the corresponding local detection records.
+After installation, select a model in the target Codex task and send `$gpt-model-check`. The tool returns one of the five outcomes below.
 
-### Match: this check passed
+**All five images below are simulated examples with sample data, not real detection results.** They reuse the production state illustrations, result wording, and decision rules to show the model, candidate weight, sample count, token usage, and available actions.
 
-<p>
-  <img src="assets/screenshots/match-luna.png" width="640" alt="Actual Codex result: GPT-5.6 Luna matches, with 3/3 valid samples, 62,101 input tokens and 10,301 output tokens">
-</p>
-
-The selected model is `gpt-5.6-luna`, and the closest reference fingerprint is also `gpt-5.6-luna`. **All three samples are valid and the current decision thresholds are met.** The displayed `>99.9%` is a relative weight among candidates in the reference bank, not the tool's accuracy or proof of model identity.
-
-**Next step:** This check found no sign of model substitution. Continue using your model, or click **View detection record** (`查看检测记录`) to inspect the configuration, raw responses, and scores in the right sidebar.
-
-### Inconclusive: ranked first, but the evidence is insufficient
+### 1. Match
 
 <p>
-  <img src="assets/screenshots/inconclusive-sol.png" width="800" alt="Actual Codex result: GPT-5.6 Sol ranks first but leads the runner-up by 0.171 points, below the 0.500 threshold, so the result is inconclusive">
+  <img src="assets/examples/match.png" width="800" alt="Simulated result 1/5: the selected GPT-6 Astra matches its reference fingerprint, with valid samples and token usage shown">
 </p>
 
-Here, `gpt-5.6-sol` is both the selected model and the top candidate, and all three samples are valid. However, it leads the runner-up, `gpt-5.6-terra`, by only **0.171 points**, below the required **0.500 points**. Ranking first does not by itself meet the decision rules. This result establishes neither a match nor a substitution.
+The selected model and closest fingerprint agree, and the samples, relative weight, and score margin meet the current rules. This outcome means the check found no sign of model substitution.
 
-**Next step:** Click **Run again** (`重新检测`), the text link with a circular arrow. It sends a new detection message to the current task, collects fresh samples, and produces a new result. The client may ask for confirmation. A recheck consumes tokens; it does not just refresh or replay the previous result.
+**Next step:** Continue using your model, or click **View detection record** (`查看检测记录`) to inspect the samples and scores in the right sidebar.
 
-### Unsupported: this model is outside the tool's current coverage
+### 2. Mismatch
 
 <p>
-  <img src="assets/screenshots/unsupported-deepseek.png" width="640" alt="Actual Codex result: DeepSeek V4 Pro is unsupported, no probes were sent, valid samples are 0/3 and probe token usage is zero">
+  <img src="assets/examples/mismatch.png" width="800" alt="Simulated result 2/5: GPT-6 Astra is selected, but the fingerprint is closer to GPT-5.6 Luna">
 </p>
 
-The selected model is `deepseek/deepseek-v4-pro`, which is outside the tool's supported GPT set, so **no probes were sent**. The `0/3` samples and zero input/output tokens mean sampling did not run; they do not indicate a problem with DeepSeek.
+The example selects `gpt-6-astra`, but the fingerprint is closer to `gpt-5.6-luna` and meets the current mismatch thresholds. This is a signal to investigate, not proof that a provider has substituted the model.
 
-**Next step:** To use this tool, select a GPT from its supported list in Codex and send `$gpt-model-check`. Repeated checks of the same unsupported model will not extend coverage.
+**Next step:** Check the selected model and provider, then send `$gpt-model-check` again. Keep the records if you need to compare runs.
 
-The screenshots include displays of previously saved results. Token figures belong to the corresponding probe runs, not the entire conversation. The turn duration at the top may include a replay and should not be used to estimate how long a new check takes.
+### 3. Inconclusive
+
+<p>
+  <img src="assets/examples/inconclusive.png" width="800" alt="Simulated result 3/5: the top candidate leads by only 0.170 points, below the 0.500 threshold, with a Run again action">
+</p>
+
+Here, `gpt-5.6-sol` ranks first but leads the runner-up by only **0.170 points**, below the required **0.500 points**. The tool does not classify this as a match or a mismatch. Incomplete samples can also produce an inconclusive result.
+
+**Next step:** Click **Run again** (`重新检测`), the text link with a circular arrow. It sends a new detection message to the current task and collects fresh samples. The client may ask for confirmation, and the new run consumes tokens.
+
+### 4. Unsupported model
+
+<p>
+  <img src="assets/examples/unsupported.png" width="800" alt="Simulated result 4/5: DeepSeek V4 Pro is outside the supported set, so no probes are sent and sample and token counts are zero">
+</p>
+
+The selected model is outside the tool's supported GPT set, so no probes are sent. The `0/3` samples and zero tokens mean sampling did not run; they do not indicate a problem with that model.
+
+**Next step:** Select a GPT from the supported list and run the check. Repeated checks of the same unsupported model will not extend coverage.
+
+### 5. Execution failed
+
+<p>
+  <img src="assets/examples/error.png" width="800" alt="Simulated result 5/5: probe requests timed out, no usable samples were received, and token usage is unavailable">
+</p>
+
+In this example, probe requests time out without usable samples. Connection, authentication, or protocol errors can also cause execution failures; these do not establish model substitution. Unknown usage is displayed as **not returned** (`未返回`), rather than zero.
+
+**Next step:** Address the reported cause, check connectivity or client compatibility as needed, then run the check again.
+
+The action labels in these images are illustrative. In actual use, **View detection record** opens a local JSON file and **Run again** starts a fresh check. Relative candidate weights are comparisons within the reference bank, not calibrated probabilities of model identity.
 
 Result messages and illustrations currently use Chinese; the explanations above and instructions below are in English.
 
