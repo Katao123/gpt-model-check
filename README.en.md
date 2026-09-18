@@ -10,23 +10,41 @@ This is an experimental **model fingerprinting tool**. It can provide clues abou
 
 ## What you get
 
+After installation, select a model in the Codex task you want to check and send `$gpt-model-check`. These are actual Codex Desktop screenshots. The model IDs, sample counts, and token figures have been checked against the corresponding local detection records.
+
+### Match: this check passed
+
 <p>
-  <img src="assets/states/match.png" width="116" alt="Fingerprint match">
-  <img src="assets/states/mismatch.png" width="116" alt="Fingerprint mismatch">
-  <img src="assets/states/inconclusive.png" width="116" alt="Inconclusive">
-  <img src="assets/states/unsupported.png" width="116" alt="Unsupported model">
-  <img src="assets/states/error.png" width="116" alt="Execution failed">
+  <img src="assets/screenshots/match-luna.png" width="640" alt="Actual Codex result: GPT-5.6 Luna matches, with 3/3 valid samples, 62,101 input tokens and 10,301 output tokens">
 </p>
 
-These are sample status illustrations. Each actual result includes:
+The selected model is `gpt-5.6-luna`, and the closest reference fingerprint is also `gpt-5.6-luna`. **All three samples are valid and the current decision thresholds are met.** The displayed `>99.9%` is a relative weight among candidates in the reference bank, not the tool's accuracy or proof of model identity.
 
-- A status illustration and a short conclusion.
-- The selected model, closest reference fingerprint, and relative candidate weight when meaningful.
-- The number of valid samples and reported input/output token usage.
-- **View detection record** (`查看检测记录`): opens the local JSON record in Codex Desktop's right sidebar.
-- **Run again** (`重新检测`): a text link with a circular arrow, shown for inconclusive results. Clicking it sends a new detection request to the current task. The client may ask for confirmation.
+**Next step:** This check found no sign of model substitution. Continue using your model, or click **View detection record** (`查看检测记录`) to inspect the configuration, raw responses, and scores in the right sidebar.
 
-Result messages and illustrations currently use Chinese; this page provides English setup and usage instructions.
+### Inconclusive: ranked first, but the evidence is insufficient
+
+<p>
+  <img src="assets/screenshots/inconclusive-sol.png" width="800" alt="Actual Codex result: GPT-5.6 Sol ranks first but leads the runner-up by 0.171 points, below the 0.500 threshold, so the result is inconclusive">
+</p>
+
+Here, `gpt-5.6-sol` is both the selected model and the top candidate, and all three samples are valid. However, it leads the runner-up, `gpt-5.6-terra`, by only **0.171 points**, below the required **0.500 points**. Ranking first does not by itself meet the decision rules. This result establishes neither a match nor a substitution.
+
+**Next step:** Click **Run again** (`重新检测`), the text link with a circular arrow. It sends a new detection message to the current task, collects fresh samples, and produces a new result. The client may ask for confirmation. A recheck consumes tokens; it does not just refresh or replay the previous result.
+
+### Unsupported: this model is outside the tool's current coverage
+
+<p>
+  <img src="assets/screenshots/unsupported-deepseek.png" width="640" alt="Actual Codex result: DeepSeek V4 Pro is unsupported, no probes were sent, valid samples are 0/3 and probe token usage is zero">
+</p>
+
+The selected model is `deepseek/deepseek-v4-pro`, which is outside the tool's supported GPT set, so **no probes were sent**. The `0/3` samples and zero input/output tokens mean sampling did not run; they do not indicate a problem with DeepSeek.
+
+**Next step:** To use this tool, select a GPT from its supported list in Codex and send `$gpt-model-check`. Repeated checks of the same unsupported model will not extend coverage.
+
+The screenshots include displays of previously saved results. Token figures belong to the corresponding probe runs, not the entire conversation. The turn duration at the top may include a replay and should not be used to estimate how long a new check takes.
+
+Result messages and illustrations currently use Chinese; the explanations above and instructions below are in English.
 
 ## Install
 

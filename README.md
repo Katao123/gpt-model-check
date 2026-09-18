@@ -10,21 +10,39 @@
 
 ## 使用效果
 
+安装后，在目标 Codex 任务中选择模型，发送 `$gpt-model-check`。下面是实际 Codex Desktop 界面截图，图中的模型、样本数和 Token 已与对应的本地检测记录核对。
+
+### 指纹匹配：这次检测通过
+
 <p>
-  <img src="assets/states/match.png" width="116" alt="指纹匹配：对上啦！">
-  <img src="assets/states/mismatch.png" width="116" alt="指纹不符：有点不对劲">
-  <img src="assets/states/inconclusive.png" width="116" alt="证据不足：还得再看看">
-  <img src="assets/states/unsupported.png" width="116" alt="模型不支持：这个还不认识">
-  <img src="assets/states/error.png" width="116" alt="执行失败：这次没测成">
+  <img src="assets/screenshots/match-luna.png" width="640" alt="Codex 实际结果：GPT-5.6 Luna 指纹匹配，3/3 组有效，输入 62,101、输出 10,301 Token">
 </p>
 
-以上为状态样张。实际结果包含：
+这次选的是 `gpt-5.6-luna`，最接近的参考指纹也是 `gpt-5.6-luna`，**3/3 组样本有效，并通过当前判定门槛**。显示的 `>99.9%` 是库内候选的相对匹配权重，不是工具的准确率或模型身份证明。
 
-- 对应状态图片和一句结论。
-- 所选模型、最接近的参考指纹，以及可解释时的库内匹配权重。
-- 有效样本数、输入和输出 Token 用量。
-- **查看检测记录**：在 Codex Desktop 的右侧栏打开本地 JSON。
-- **重新检测**：证据不足时出现带循环箭头的文字链接，点击给当前任务发送新的检测消息。客户端可能要求确认。
+**下一步：**本次未发现换模迹象，可以继续使用。需要核对采样配置、原始答案和判分时，点击「查看检测记录」，记录会在右侧栏打开。
+
+### 证据不足：排名第一，但还不能确认
+
+<p>
+  <img src="assets/screenshots/inconclusive-sol.png" width="800" alt="Codex 实际结果：GPT-5.6 Sol 排名第一，但领先第二名 0.171 分，低于 0.500 门槛，结果为证据不足">
+</p>
+
+这次选的是 `gpt-5.6-sol`，它也排在第一名，三组样本都有效。但它只领先第二名 `gpt-5.6-terra` **0.171 分**，没有达到当前要求的 **0.500 分**，所以结果是「证据不足」。排名第一和满足判定门槛是两回事，这次尚不能确认匹配或换模。
+
+**下一步：**点击带循环箭头的「重新检测」。它会向当前任务发送一条新的检测消息，重新采样并给出新结果；客户端可能要求确认。重测也会消耗 Token，不会只刷新或重复展示旧结果。
+
+### 模型不支持：本工具还没有覆盖这个型号
+
+<p>
+  <img src="assets/screenshots/unsupported-deepseek.png" width="640" alt="Codex 实际结果：DeepSeek V4 Pro 暂不支持检测，未发送探针，有效样本 0/3，探针 Token 为 0">
+</p>
+
+这次选的是 `deepseek/deepseek-v4-pro`，不在本工具当前支持的 GPT 型号内，因此**没有发送探针**。`0/3` 和输入、输出 Token 为 `0` 表示没有进行采样，不代表 DeepSeek 有问题。
+
+**下一步：**如需使用本工具检测，请在 Codex 中选择支持列表内的 GPT，再发送 `$gpt-model-check`。同一不支持的型号反复重测不会增加识别能力。
+
+截图包含已有检测结果的展示；Token 数来自对应采样记录，不是整轮聊天用量。顶部会话用时可能包含结果回放，不能用来估计一次新检测需要多久。
 
 ## 安装
 
