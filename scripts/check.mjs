@@ -88,7 +88,7 @@ export async function execute(options, { env = process.env, progress = () => {},
   const start = Date.now();
   const { app, source, runtime, originator } = await connectCurrent(options, env);
   const report = {
-    schemaVersion: 1, tool: 'gpt-model-check', toolVersion: '0.1.13', command: options.command,
+    schemaVersion: 1, tool: 'gpt-model-check', toolVersion: '0.1.14', command: options.command,
     createdAt: new Date().toISOString(), context: options.context || 'fresh',
     source: { id: source.id, model: source.model, provider: source.modelProvider, effort: source.reasoningEffort, originator },
     runtime: { file: runtime.file, selection: runtime.selection, platform: process.platform, node: process.version },

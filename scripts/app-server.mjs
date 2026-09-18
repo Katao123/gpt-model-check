@@ -46,7 +46,7 @@ export class AppServer extends EventEmitter {
   }
   async initialize() {
     const info = await this.request('initialize', {
-      clientInfo: { name: 'gpt_model_check', version: '0.1.13' }, capabilities: { experimentalApi: true },
+      clientInfo: { name: 'gpt_model_check', version: '0.1.14' }, capabilities: { experimentalApi: true },
     });
     this.write({ method: 'initialized', params: {} }); return info;
   }
